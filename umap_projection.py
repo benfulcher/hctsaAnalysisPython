@@ -1,5 +1,7 @@
 #-------------------------------------------------------------------------------
 # Visualize labeled HCTSA dataset as a UMAP projection
+# Learn about umap here:
+# http://umap-learn.readthedocs.io/en/latest/basic_usage.html
 #-------------------------------------------------------------------------------
 import matplotlib as plt
 import seaborn as sns
