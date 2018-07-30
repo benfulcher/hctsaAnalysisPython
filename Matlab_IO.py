@@ -128,4 +128,4 @@ def read_from_mat_file(mat_file_path,hctsa_struct_names,is_from_old_matlab = Fal
                 m_operations[key] = [extractor(i) for i in range(mat_file['MasterOperations'].shape[0])]
             retval = retval + (m_operations,)
 
-return retval
+    return retval
