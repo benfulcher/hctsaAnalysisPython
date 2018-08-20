@@ -33,16 +33,14 @@ def LoadResults(fromCSV=True):
 
 #-------------------------------------------------------------------------------
 def UMAP_embed(dataMatrix):
-    """ Compute a 2d umap projection of the data in dataMatrix
-    """
+    "Compute a 2d umap projection of the data in dataMatrix"
     reducer = umap.UMAP()
     embedding = reducer.fit_transform(dataMatrix)
     df = pd.DataFrame(data=embedding,columns=('umap-1','umap-2'))
     return df
 
 def PCA_embed(dataMatrix):
-    """ Compute a 2d PCA projection of the data in dataMatrix
-    """
+    "Compute a 2d PCA projection of the data in dataMatrix"
     pca = sklearn.decomposition.PCA(n_components=2)
     pca.fit(dataMatrix)
     embedding = pca.transform(dataMatrix)
@@ -63,26 +61,26 @@ def plot_projection(df,xData,yData,doSave=False):
     return lowDim
 
 #-------------------------------------------------------------------------------
-def main():
-    # Load data from hctsa calculation:
-    dataMatrix,tsLabels = LoadResults()
-    # Compute a umap projection in a dataframe:
-    df_umap = UMAP_embed(dataMatrix)
-    df_PCA = PCA_embed(dataMatrix)
-    # Add label information:
-    df_umap['label'] = tsLabels['label']
-    df_PCA['label'] = tsLabels['label']
+# def main():
+# Load data from hctsa calculation:
+dataMatrix,tsLabels = LoadResults()
+# Compute a umap projection in a dataframe:
+df_umap = UMAP_embed(dataMatrix)
+df_PCA = PCA_embed(dataMatrix)
+# Add label information:
+df_umap['label'] = tsLabels['label']
+df_PCA['label'] = tsLabels['label']
 
-    # Plot and save:
-    lowDim = plot_projection(df_umap,'umap-1','umap-2')
-    fileName = 'umapProjection.png'
-    lowDim.savefig(fileName)
-    display("Saved output to %s" % fileName)
+# Plot and save:
+lowDim = plot_projection(df_umap,'umap-1','umap-2')
+fileName = 'umapProjection.svg'
+lowDim.savefig(fileName)
+display("Saved output to %s" % fileName)
 
-    # Plot and save:
-    lowDim = plot_projection(df_PCA,'PC-1','PC-2')
-    fileName = 'PCProjection.png'
-    lowDim.savefig(fileName)
-    display("Saved output to %s" % fileName)
+# Plot and save:
+lowDim = plot_projection(df_PCA,'PC-1','PC-2')
+fileName = 'PCProjection.svg'
+lowDim.savefig(fileName)
+display("Saved output to %s" % fileName)
 
-if __name__ == "__main__": main()
+# if __name__ == "__main__": main()
